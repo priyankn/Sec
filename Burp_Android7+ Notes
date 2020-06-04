@@ -1,7 +1,7 @@
 
 ## Install Burp cert on Android 7+ 
 
-# convert to PEM and ge the hash
+# convert to PEM and get the hash
 openssl x509 -inform DER -in Burp.cer -out Burp.pem
 openssl x509 -inform PEM -subject_hash_old -in Burp.pem |head -1
 9a5ba575
