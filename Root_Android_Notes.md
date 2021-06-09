@@ -20,9 +20,9 @@ Finished. Total time: 2.820s
 Rebooting into bootloader                          OKAY [  0.008s]
 Finished. Total time: 0.008s
 --------------------------------------------
-Bootloader Version...: BHZ32c
-Baseband Version.....: M8994F-2.6.42.5.03
-Serial Number........: 0125d1c99fdb43d2
+Bootloader Version...: [REDACTED]
+Baseband Version.....: [REDACTED]
+Serial Number........:  [REDACTED]
 --------------------------------------------
 extracting android-info.txt (0 MB) to RAM...
 Checking 'product'                                 OKAY [  0.019s]
