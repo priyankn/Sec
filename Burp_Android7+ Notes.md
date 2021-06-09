@@ -7,9 +7,12 @@ openssl x509 -inform PEM -subject_hash_old -in Burp.pem |head -1
 9a5ba575
 
 ### Move to device
+
+```
 $ mv Burp.pem 9a5ba575.0
 $ adb push 9a5ba575.0 /sdcard
 9a5ba575.0: 1 file pushed. 0.1 MB/s (1375 bytes in 0.026s)
+```
 
 ### set selinux to permissive in order to mount the /system as permissive
 
