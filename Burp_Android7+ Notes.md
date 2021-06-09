@@ -1,10 +1,13 @@
 
 ## Install Burp cert on Android 7+ 
 
-### convert to PEM and get the hash
+### Convert to PEM and get the hash
+
+```
 openssl x509 -inform DER -in Burp.cer -out Burp.pem
 openssl x509 -inform PEM -subject_hash_old -in Burp.pem |head -1
 9a5ba575
+```
 
 ### Move to device
 
@@ -14,7 +17,7 @@ $ adb push 9a5ba575.0 /sdcard
 9a5ba575.0: 1 file pushed. 0.1 MB/s (1375 bytes in 0.026s)
 ```
 
-### set selinux to permissive in order to mount the /system as permissive
+### Set selinux to permissive in order to mount the /system as permissive
 
 ```bullhead:/ # getenforce
 Enforcing
