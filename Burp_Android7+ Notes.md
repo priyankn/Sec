@@ -1,24 +1,26 @@
 
 ## Install Burp cert on Android 7+ 
 
-# convert to PEM and get the hash
+### convert to PEM and get the hash
 openssl x509 -inform DER -in Burp.cer -out Burp.pem
 openssl x509 -inform PEM -subject_hash_old -in Burp.pem |head -1
 9a5ba575
 
-# Move to device
+### Move to device
 $ mv Burp.pem 9a5ba575.0
 $ adb push 9a5ba575.0 /sdcard
 9a5ba575.0: 1 file pushed. 0.1 MB/s (1375 bytes in 0.026s)
 
-# set selinux to permissive in order to mount the /system as permissive
-bullhead:/ # getenforce
+### set selinux to permissive in order to mount the /system as permissive
+
+```bullhead:/ # getenforce
 Enforcing
 bullhead:/ # setenforce 0
 bullhead:/ # getenforce                                                                                                                                               
 Permissive
+```
 
-# Remount in RW
+### Remount in RW
 
 ```
 bullhead:/ # mount -o rw,remount,rw /
@@ -26,14 +28,14 @@ bullhead:/ # rm /system/etc/security/cacerts/9576d26b.0
 
 ```
 
-## Check if it actually remounted, if it did not, rm would not be allowed. Else the steps will have to be repeated.
+#### Check if it actually remounted, if it did not, rm would not be allowed. Else the steps will have to be repeated.
 
 ```
 rm ro /system/etc/security/cacerts/9576d26b.0 (y/N):y
 rm: /system/etc/security/cacerts/9576d26b.0: Read-only file system
 ```
 
-# Copy and reboot
+### Copy and reboot
 
 ```
 bullhead:/ # ls -lrt /system/etc/security/cacerts/9a*
