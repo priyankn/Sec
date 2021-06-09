@@ -2,9 +2,7 @@
 Recover stock images.
 Fetch at https://developers.google.com/android/images 
 
-
-
-### Recover Nexus 5X 
+### Recover Nexus 5X  (Optional)
 
 ```
 MBP-BF:bullhead-opm7.181205.001 $ adb reboot-bootloader
@@ -90,3 +88,32 @@ Writing 'cache'                                    OKAY [  0.018s]
 Rebooting                                          OKAY [  0.020s]
 Finished. Total time: 167.736s
 ```
+
+### Install Magisk Manager App 
+
+```
+adb install ~/Downloads/Magisk-v23.0.apk 
+Performing Streamed Install
+Success
+```
+
+### Copy the stock boot image onto sdcard and patch the image using Magisk 
+
+```
+adb push image-bullhead-opm7.181205.001/boot.img /sdcard
+image-bullhead-opm7.181205.001/boot.img: 1 file pushed, 0 skipped. 23.0 MB/s (12063974 bytes in 0.500s)
+```
+
+### Copy back the patched image and flash it as boot
+
+```
+$ adb pull /sdcard/Download/magisk_patched-23000_AITw9.img .
+/sdcard/Download/magisk_patched-23000_AITw9.img: 1 file pulled, 0 skipped. 21.4 MB/s (12383528 bytes in 0.553s)
+$ fastboot flash boot magisk_patched-23000_AITw9.img 
+Sending 'boot' (12093 KB)                          OKAY [  0.332s]
+Writing 'boot'                                     OKAY [  0.229s]
+Finished. Total time: 0.623s
+```
+
+
+
