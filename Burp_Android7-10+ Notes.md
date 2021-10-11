@@ -1,6 +1,7 @@
 
 ## Install Burp cert on Android 10+ 
 
+
 If `dm-verity` is enabled on Android 10+, and you have a user build i.e. it cannot be disabled 
 
 You can't mount `/system` in android 10+ without disabling dm-verity. You can still however mount a tempfs on `/system/etc/security/cacerts` to make this work temporarily (i.e. until you reboot). Your device still needs to be rooted to make this work.
@@ -109,13 +110,16 @@ bullhead:/ # ls -lrt /system/etc/security/cacerts/9a*
 bullhead:/ # reboot
 ```
 
-P.S - the adb root command wasn't working (adbd cannot run as root in production builds) so had to append ro.debuggable=1 to some files (as advised inhttps://stackoverflow.com/questions/25477424/adb-shell-su-works-but-adb-root-does-not ) 
+P.S - the adb root command wasn't working (adbd cannot run as root in production builds) so had to append ro.debuggable=1 to some files (as advised [here](https://stackoverflow.com/questions/25477424/adb-shell-su-works-but-adb-root-does-not) ) 
 These changes should not affect the above steps because I worked on the root shell.  Or Maybe it did because I did get this once:
+```
 1|bullhead:/ $ mount -o rw,remount /system
 mount: '/dev/block/platform/soc.0/f9824900.sdhci/by-name/system' not user mountable in fstab
+```
 
-
-
+#### References 
+- [HttpToolKit](https://httptoolkit.tech/docs/guides/android/#adb-interception)
+- [HTTPToolkit Script](https://github.com/httptoolkit/httptoolkit-server/blob/master/src/interceptors/android/adb-commands.ts#L206)
 
 
 
