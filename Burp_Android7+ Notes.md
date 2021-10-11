@@ -1,5 +1,56 @@
 
-## Install Burp cert on Android 7+ 
+## Install Burp cert on Android 10+ 
+
+If `dm-verity` is enabled on Android 10+, and you have a user build i.e. it cannot be disabled 
+
+You can't mount `/system` in android 10+ without disabling dm-verity. You can still however mount a tempfs on `/system/etc/security/cacerts` to make this work temporarily (i.e. until you reboot). Your device still needs to be rooted to make this work.
+
+```
+$ adb shell
+$ su
+# whoami
+root
+```
+
+### Create a separate temp directory, to hold the current certificates 
+
+`mkdir -m 700 /wherever/you/want
+`
+
+### Copy the existing certificates
+
+`cp /system/etc/security/cacerts/* /wherever/you/want/
+`
+
+### Create an in-memory mount
+
+`mount -t tmpfs tmpfs /system/etc/security/cacerts
+`
+
+### Copy the existing certs back into the tmpfs mount
+
+`mv /whereever/you/want/* /system/etc/security/cacerts/
+`
+
+### Copy the new certificate, the cert file should be named in the hash.0 format (See below to convert PEM to hash)
+
+`mv /path/to/cert/hash.0 /system/etc/security/cacerts/
+`
+
+### Update the perms & selinux context labels, so everything is as readable as before
+
+`
+chown root:root /system/etc/security/cacerts/*
+chmod 644 /system/etc/security/cacerts/*
+chcon u:object_r:system_file:s0 /system/etc/security/cacerts/*
+`
+
+### Enjoy until next reboot! 
+
+-----------------------------------------------------------------------------------------------
+
+
+## Install Burp cert on Android 7-10 
 
 ### Convert to PEM and get the hash
 
@@ -62,6 +113,8 @@ P.S - the adb root command wasn't working (adbd cannot run as root in production
 These changes should not affect the above steps because I worked on the root shell.  Or Maybe it did because I did get this once:
 1|bullhead:/ $ mount -o rw,remount /system
 mount: '/dev/block/platform/soc.0/f9824900.sdhci/by-name/system' not user mountable in fstab
+
+
 
 
 
