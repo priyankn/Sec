@@ -40,11 +40,11 @@ root
 
 ### Update the perms & selinux context labels, so everything is as readable as before
 
-`
+```
 chown root:root /system/etc/security/cacerts/*
 chmod 644 /system/etc/security/cacerts/*
 chcon u:object_r:system_file:s0 /system/etc/security/cacerts/*
-`
+```
 
 ### Enjoy until next reboot! 
 
