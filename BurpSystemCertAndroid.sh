@@ -9,7 +9,6 @@ mount -t tmpfs tmpfs /system/etc/security/cacerts
 mv $DIR/* /system/etc/security/cacerts/
 
 
-
 #if[ -z "$BURP_CERT" ]
 #then
 #echo "Copying $BURP_CERT"
@@ -19,10 +18,10 @@ mv $DIR/* /system/etc/security/cacerts/
 cp /sdcard/9a5ba575.0 /system/etc/security/cacerts/
 #fi
 
-#echo "[+] Setting up Permissions on the certs directory.."
-#chown root:root /system/etc/security/cacerts/*
-#chmod 644 /system/etc/security/cacerts/*
-#chcon u:object_r:system_file:s0 /system/etc/security/cacerts/*
+echo "[+] Setting up Permissions on the certs directory.."
+chown root:root /system/etc/security/cacerts/*
+chmod 644 /system/etc/security/cacerts/*
+chcon u:object_r:system_file:s0 /system/etc/security/cacerts/*
 
 echo "[+] All Done"
 
