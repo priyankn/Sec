@@ -1,4 +1,23 @@
-Android Rooting Guide - [Pixel 5]
+### Simplest Method 
+
+Patch the boot.img via Magisk and load that via fastboot. 
+
+```
+> adb reboot bootloader
+> fastboot boot .\redfin-tp1a.221005.002-factory-3c13ab73\magisk_patched-25200_Knyqr.img
+Sending 'boot.img' (98304 KB)                      OKAY [  3.242s]
+Booting                                            (bootloader) boot.img missing cmdline or OS version
+```
+
+After boot: 
+```
+> adb shell
+redfin:/ $ su
+redfin:/ # id
+uid=0(root) gid=0(root) groups=0(root) context=u:r:magisk:s0
+```
+
+#### Android Rooting Guide - [Pixel 5]
 
 
 1. Unlock Bootloader - If `adb devices` work but fastboot doesn't detect the device, install the fastbooot drivers. 
